@@ -33,7 +33,14 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public static implicit operator ConditionalValue<T>(T b) => new ConditionalValue<T>(b);
 
-        public static implicit operator T(ConditionalValue<T> d) => d.Value;
-    }
+        public static implicit operator T(ConditionalValue<T> d)
+        {
+            if (d is null)
+            {
+                throw new ArgumentNullException(nameof(d));
+            }
 
+            return d.Value;
+        }
+    }
 }
