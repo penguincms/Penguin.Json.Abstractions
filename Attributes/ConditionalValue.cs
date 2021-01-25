@@ -4,7 +4,7 @@ namespace Penguin.Json.Abstractions.Attributes
 {
     public abstract class ConditionalValue
     {
-        protected object ovalue;
+        protected object Ovalue { get; set; }
 
         private bool shouldSerialize = true;
 
@@ -12,14 +12,8 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public bool ShouldSerialize
         {
-            get
-            {
-                return ShouldSerializeFunc?.Invoke() ?? shouldSerialize;
-            }
-            set
-            {
-                shouldSerialize = value;
-            }
+            get => this.ShouldSerializeFunc?.Invoke() ?? this.shouldSerialize;
+            set => this.shouldSerialize = value;
         }
 
         protected Func<object> GetValueFunc { get; set; }
@@ -28,16 +22,22 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public ConditionalValue(Type objectType)
         {
-            ObjectType = objectType;
+            this.ObjectType = objectType;
         }
 
-        public T GetValue<T>() => (T)ovalue;
+        public T GetValue<T>()
+        {
+            return (T)this.Ovalue;
+        }
 
-        public object GetValue() => GetValueFunc?.Invoke() ?? ovalue;
+        public object GetValue()
+        {
+            return this.GetValueFunc?.Invoke() ?? this.Ovalue;
+        }
 
         public override string ToString()
         {
-            return ovalue?.ToString();
+            return this.Ovalue?.ToString();
         }
     }
 }

@@ -6,14 +6,14 @@ namespace Penguin.Json.Abstractions.Attributes
     {
         public T Value
         {
-            get => GetValue<T>();
-            set => ovalue = value;
+            get => this.GetValue<T>();
+            set => this.Ovalue = value;
         }
 
         public ConditionalValue(T value, Func<bool> shouldSerializeFunc) : base(typeof(T))
         {
-            Value = value;
-            ShouldSerializeFunc = shouldSerializeFunc;
+            this.Value = value;
+            this.ShouldSerializeFunc = shouldSerializeFunc;
         }
 
         public ConditionalValue(T value) : this(value, null)
@@ -22,16 +22,19 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public ConditionalValue(Func<bool> shouldSerializeFunc = null) : base(typeof(T))
         {
-            ShouldSerializeFunc = shouldSerializeFunc;
+            this.ShouldSerializeFunc = shouldSerializeFunc;
         }
 
         public ConditionalValue(Func<T> getValue, Func<bool> shouldSerializeFunc = null) : this(shouldSerializeFunc)
         {
-            ShouldSerializeFunc = shouldSerializeFunc;
-            GetValueFunc = () => getValue;
+            this.ShouldSerializeFunc = shouldSerializeFunc;
+            this.GetValueFunc = () => getValue;
         }
 
-        public static implicit operator ConditionalValue<T>(T b) => new ConditionalValue<T>(b);
+        public static implicit operator ConditionalValue<T>(T b)
+        {
+            return new ConditionalValue<T>(b);
+        }
 
         public static implicit operator T(ConditionalValue<T> d)
         {
