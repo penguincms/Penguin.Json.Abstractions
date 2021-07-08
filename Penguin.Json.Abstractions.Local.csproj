@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <PackageProjectUrl>https://github.com/penguincms/Penguin.Json.Abstractions</PackageProjectUrl>
+    <PackageProjectUrl>https://github.com/PenguinCMS/Penguin.Json.Abstractions</PackageProjectUrl>
     <DocumentationFile>Penguin.Json.Abstractions.xml</DocumentationFile>
     <Version>5.0.5</Version>
     <AssemblyName>Penguin.Json.Abstractions</AssemblyName>

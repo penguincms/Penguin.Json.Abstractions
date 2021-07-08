@@ -17,12 +17,24 @@ namespace Penguin.Json.Abstractions.Attributes
         protected object Ovalue { get; set; }
         protected Func<bool> ShouldSerializeFunc { get; set; }
 
-        public ConditionalValue(Type objectType) => this.ObjectType = objectType;
+        public ConditionalValue(Type objectType)
+        {
+            this.ObjectType = objectType;
+        }
 
-        public T GetValue<T>() => (T)this.Ovalue;
+        public T GetValue<T>()
+        {
+            return (T)this.Ovalue;
+        }
 
-        public object GetValue() => this.GetValueFunc?.Invoke() ?? this.Ovalue;
+        public object GetValue()
+        {
+            return this.GetValueFunc?.Invoke() ?? this.Ovalue;
+        }
 
-        public override string ToString() => this.Ovalue?.ToString();
+        public override string ToString()
+        {
+            return this.Ovalue?.ToString();
+        }
     }
 }
