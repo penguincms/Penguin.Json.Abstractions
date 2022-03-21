@@ -31,10 +31,7 @@ namespace Penguin.Json.Abstractions.Attributes
             this.GetValueFunc = () => getValue;
         }
 
-        public static implicit operator ConditionalValue<T>(T b)
-        {
-            return new ConditionalValue<T>(b);
-        }
+        public static implicit operator ConditionalValue<T>(T b) => new ConditionalValue<T>(b);
 
         public static implicit operator T(ConditionalValue<T> d)
         {
