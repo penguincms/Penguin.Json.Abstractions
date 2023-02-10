@@ -5,6 +5,7 @@ namespace Penguin.Json.Abstractions.Attributes
     public abstract class ConditionalValue
     {
         private bool shouldSerialize = true;
+
         public Type ObjectType { get; private set; }
 
         public bool ShouldSerialize
@@ -14,7 +15,9 @@ namespace Penguin.Json.Abstractions.Attributes
         }
 
         protected Func<object> GetValueFunc { get; set; }
+
         protected object Ovalue { get; set; }
+
         protected Func<bool> ShouldSerializeFunc { get; set; }
 
         protected ConditionalValue(Type objectType)
