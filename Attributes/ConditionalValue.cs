@@ -9,32 +9,32 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public bool ShouldSerialize
         {
-            get => this.ShouldSerializeFunc?.Invoke() ?? this.shouldSerialize;
-            set => this.shouldSerialize = value;
+            get => ShouldSerializeFunc?.Invoke() ?? shouldSerialize;
+            set => shouldSerialize = value;
         }
 
         protected Func<object> GetValueFunc { get; set; }
         protected object Ovalue { get; set; }
         protected Func<bool> ShouldSerializeFunc { get; set; }
 
-        public ConditionalValue(Type objectType)
+        protected ConditionalValue(Type objectType)
         {
-            this.ObjectType = objectType;
+            ObjectType = objectType;
         }
 
         public T GetValue<T>()
         {
-            return (T)this.Ovalue;
+            return (T)Ovalue;
         }
 
         public object GetValue()
         {
-            return this.GetValueFunc?.Invoke() ?? this.Ovalue;
+            return GetValueFunc?.Invoke() ?? Ovalue;
         }
 
         public override string ToString()
         {
-            return this.Ovalue?.ToString();
+            return Ovalue?.ToString();
         }
     }
 }
