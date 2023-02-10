@@ -6,14 +6,14 @@ namespace Penguin.Json.Abstractions.Attributes
     {
         public T Value
         {
-            get => this.GetValue<T>();
-            set => this.Ovalue = value;
+            get => GetValue<T>();
+            set => Ovalue = value;
         }
 
         public ConditionalValue(T value, Func<bool> shouldSerializeFunc) : base(typeof(T))
         {
-            this.Value = value;
-            this.ShouldSerializeFunc = shouldSerializeFunc;
+            Value = value;
+            ShouldSerializeFunc = shouldSerializeFunc;
         }
 
         public ConditionalValue(T value) : this(value, null)
@@ -22,13 +22,13 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public ConditionalValue(Func<bool> shouldSerializeFunc = null) : base(typeof(T))
         {
-            this.ShouldSerializeFunc = shouldSerializeFunc;
+            ShouldSerializeFunc = shouldSerializeFunc;
         }
 
         public ConditionalValue(Func<T> getValue, Func<bool> shouldSerializeFunc = null) : this(shouldSerializeFunc)
         {
-            this.ShouldSerializeFunc = shouldSerializeFunc;
-            this.GetValueFunc = () => getValue;
+            ShouldSerializeFunc = shouldSerializeFunc;
+            GetValueFunc = () => getValue;
         }
 
         public static implicit operator ConditionalValue<T>(T b)
@@ -38,12 +38,17 @@ namespace Penguin.Json.Abstractions.Attributes
 
         public static implicit operator T(ConditionalValue<T> d)
         {
-            if (d is null)
-            {
-                throw new ArgumentNullException(nameof(d));
-            }
+            return d is null ? throw new ArgumentNullException(nameof(d)) : d.Value;
+        }
 
-            return d.Value;
+        public ConditionalValue<T> ToConditionalValue()
+        {
+            throw new NotImplementedException();
+        }
+
+        public T ToT()
+        {
+            throw new NotImplementedException();
         }
     }
 }
